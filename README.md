@@ -50,7 +50,7 @@ The first model featured a new date by month catagory, dummy variables for the r
 
 The second model incorperated the predictors from model one with a change to the yr_renovated column.  The variable was changed into a catagory of renovated_after_2000 with a value of one and all other values being 0.  A dummy column was added for the new predictor.  Model 2 had an OLS R-squared value of .804 and an RMSE on the test set of 161975.39.
 
-![risidual](./Images/risidual plot.png)
+![risidual](./Images/risidual_plot.png)
 
 The third model built off the first 2 and featured a new predictor of sqrt_lot X bedrooms.  Model 3 had an OLS R-squared value of .800 and an RMSE of 162182.48
 
