@@ -40,14 +40,14 @@ In this project, I preformed an Exploritory data analysis, creating new features
 
 ## Results
 My Exploritory Data Analysis revealed several potential outliers and multicolinier variables.
-![waterfront](./images/waterfront.png)
-![heatmap](./images/heatmap.png)
+![waterfront](./images/waterfront.png?raw=True)
+![heatmap](./images/heatmap.png?raw=True)
 The outliers and multicolinier variables where removed in order to proceed with the feature generation and modeling
 
 The first model featured a new date by month catagory, dummy variables for the remaining catagorical data and scalled continous variables.  The model had an OLS R-squared value of .806.  An RMSE evaluation resulted in a error value of 2.959139033524656e+16 for the test set.  
 
 The second model incorperated the predictors from model one with a change to the yr_renovated column.  The variable was changed into a catagory of renovated_after_2000 with a value of one and all other values being 0.  A dummy column was added for the new predictor.  Model 2 had an OLS R-squared value of .804 and an RMSE on the test set of 161975.39.
-![risidual](./images/risidual plot.png)
+![risidual](./images/risidual plot.png?raw=True)
 
 The third model built off the first 2 and featured a new predictor of sqrt_lot X bedrooms.  Model 3 had an OLS R-squared value of .800 and an RMSE of 162182.48
 
