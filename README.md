@@ -1,61 +1,18 @@
 # Kings County Housing Bake-off
 
-For many machine learning projects, the goal is to create a model that best predicts the target variable on unseen data. In order to develop a model, we have a general process, but there is a lot of flexibility within this process. Even when working with the same data, people can produce different models by engineering different features, or by selecting certain features to include in the models. **There is no one correct way to create a model**.
+ ## Overview
+In this project we where tasked to create the best predictive model for Kings County housing prices, and valadate our model with holdout data. Using the Kings County house price database, I preformed an exploritory data analysis, identifying the nature and oddities of the data set. In my analysis I noticed issues with the date, outliers in the number of bedrooms, and several continuous predictors with catagorical aspects. To acheive the best model I engeniered several new predictors in order to best predict prices on a holdout set of data. Before running any model I checked for multicolinierity leading me to drop several paired coefficiant predictors. In the models I ran, I found the best results in a model that had the date converted to months, the years renovated converted into a catagory of not renovated and renovated after 2000 and catagorical data such as, view, waterfront, condition, year built, bedrooms, floors and zipcode where all converted into dummy catagories. My findal model had an R-squared value of .804 accounting for 80% of the varience of the model, and an RMSE value of 161975.38. The model was exported using Pickle and used to predict on the holdout data. While I do not think this is the perfect model, I believe it is on the right track to creating a good predictibe model
 
-For Phase 2, you will be creating a model that will **predict the prices of homes** sold in the Seattle, WA area. For this project there will be **3 deliverables**:
+## Bussiness Problem
+Creating a predictive model, while being data science, is not an exact science.  Many different factors need to be accounted for, such as coliniarity, outliers and the curse of dimensionality.  In order to procude the best predictive model for machine learning a data scientist must preform an indepth exploritory data analysis in order to produce the best predictive features.  While analyzing the Kings County data I considered these following questions about the data in order to stratagize for feature engineering:
+**research Questions**
+1. Does the specific month a house is sold effect the price?
+2. Do houses renovated after the year 2000 have a higher price then other houses
+3. Does roomsize combined with the lot size result in a higher house price.    
 
-- a Github repo for this project
-- a notebook showing your final modeling process
-- a CSV file of your predictions on the holdout set
-	- name this file `housing_preds_your_name.csv` (replacing `your_name` with your name) and send via Slack
 
-## Holdout predictions
-
-You will develop a model using `kc_house_data_train.csv`. Then you will use that model/process to predict on the `kc_house_data_holdout_features.csv`. 
-
-***Important note #1***: If you create a new feature with your training data, you will need to do the same thing with the test data before using the model to predict on the holdout data.  
-
-After using your model to predict the holdout data, you will submit those predictions as a `.csv` file to the instructional staff. We will score the submitted predictions using the RMSE of those predictions.
-
-***Important note #2***: While we will score and rank each submission, your class rank will **not** have any direct impact on passing Phase 2. *The goal is to make sure you can actually produce predictions*.
-
-So as long as you successfully **complete the modeling process** and can **explain the work you did**, you will be able to pass.  
-
-## Final notebook
-
-Through the modeling process, you will try many different techniques (**feature engineering** and **feature selection**, for example) to try and create your best model. Some will work and some will not lead to a better model. Through your modeling process, you will identify what actions create the best model. After you have finalized your process, you must create a 'cleaned up' and annotated notebook that shows your process.
-
-Your notebook must include the following:
-
-- **Exploratory Data Analysis (EDA):** You must create **at least 4 data visualizations** that help to explain the data. These visualizations should help someone unfamiliar with the data understand the target variable and the features that help explain that target variable.
-
-- **Feature Engineering:** You must create **at least 3 new features** to test in your model. Those features do not have to make it into your final model, as they might be removed during the feature selection process. That is expected, but you still need to explain the features you engineer and your thought process behind why you thought they would explain the selling price of the house.  
-
-- **Statistical Tests:** Your notebook must show **at least 3 statistical tests** that you preformed on your data set. Think of these as being part of your EDA process; for example, if you think houses with a view cost more than those without a view, then perform a two-sample T-test. These can be preliminary evidence that a feature will be important in your model.  
-
-- **Feature Selection:** There are many ways to do feature selection: filter methods, P-values, or recursive feature elimination (RFE). You should try multiple different techniques and combinations of them. For your final model, you will **settle on a process of feature selection**; this process should be **clearly shown in your final notebook**.
-
-- **Model Interpretation:** One of the benefits of a linear regression model is that you can **interpret the coefficients** of the model **to derive insights**. For example, which feature has the biggest impact on the price of the house? Was there a feature that you thought would be significant but was not? Think if you were a real estate agent helping clients price their house: what information would you find most helpful from this model?
-
-## GitHub Repository
-
-A GitHub repo is a good way to keep track of your work, but also to display the work you did to future employers. Your GitHub should contain the following:
-
-- A `README.md` that briefly describes the project and the files within the repo.
-- Your cleaned and annotated notebook showing your work.
-- A folder with all of your 'working' notebooks where you played around with your data and the modeling process.
-
-## Data Set Information
-
-This data set contains information about houses that were sold in the Seattle area during the last decade. Below is a description of the column names, to help you understand what the data represents. As with most real world data sets, the column names are not perfectly described, so you'll have to do some research or use your best judgment if you have questions relating to what the data means. 
-
-Like every data set, there are some irregularities and quirks. Trust me, there wasn't a house sold with 33 bedrooms, even though the data says there was. *You have to decide how you want to handle that example*. Also, some houses were sold more than once within the time frame of this dataset. Think about how that can be useful information in predicting the selling price.
-
-As you go through this modeling process, think about what determines how much someone will pay for a house.  For example, the larger the house is, the more people will pay for it. If you understand why certain houses cost more than others and represent that in your model, it will be a more accurate model.  
-
-Have fun!
-
-# Column Names and descriptions for Kings County Data Set
+## Data
+To answer our business question above, I analyzed the Kings County Housing Price data set.  The Dataframe included the following columns:
 * **id** - unique ID for a house
 * **date** - Date day house was sold
 * **price** - Price is prediction target
@@ -77,3 +34,39 @@ Have fun!
 * **long** - Longitude coordinate
 * **sqft_living15** - The square footage of interior housing living space for the nearest 15 neighbors
 * **sqft_lot15** - The square footage of the land lots of the nearest 15 neighbors
+
+## Methods
+In this project, I preformed an Exploritory data analysis, creating new features for the predictive models.  To answer the business questions I posed, I preformed statistical analysis of several existing and newley engineered features, in order to observe if they had a significant effect on the target variable.  I also preformed several visualizations to help identify multicolinearity.  The new features I created where date by month, renovated after 2000 and lot square footage multiplied by the number of house bedrooms.  They goal of the new features was to account for as much residual variance as possible in the liniear regression model.  
+
+## Results
+My Exploritory Data Analysis revealed several potential outliers and multicolinier variables.
+![waterfront](./images/waterfront.png)
+![heatmap](./images/heatmap.png)
+The outliers and multicolinier variables where removed in order to proceed with the feature generation and modeling
+
+The first model featured a new date by month catagory, dummy variables for the remaining catagorical data and scalled continous variables.  The model had an OLS R-squared value of .806.  An RMSE evaluation resulted in a error value of 2.959139033524656e+16 for the test set.  
+
+The second model incorperated the predictors from model one with a change to the yr_renovated column.  The variable was changed into a catagory of renovated_after_2000 with a value of one and all other values being 0.  A dummy column was added for the new predictor.  Model 2 had an OLS R-squared value of .804 and an RMSE on the test set of 161975.39.
+![risidual](./images/risidual plot.png)
+
+The third model built off the first 2 and featured a new predictor of sqrt_lot X bedrooms.  Model 3 had an OLS R-squared value of .800 and an RMSE of 162182.48
+
+## Conclusion
+The first model had an extremely high RMSE value on the test set.  I think this is most likely do to not accounting for the extreme split nature of the yr_renovated column, with the majority of the values being either 0 or 1970 and up.  When I created a new feature to compensate for this column my error normalized a bit.  In model 3 I attembed to imporve on Model 2 by using generating a polynomial feature.  This new feature, however did now imporve the model.  Based on the three models from my modeling process I chose to use model 2 as my predictor model.  I serialized model 2 with pickle and imported it into a new file, where I used the model to predict on the holdout set.  
+
+## For More Information
+please review my full [bake off modeling proccess](./Bakeoff_modelling_process/ipynb) and my [hold out prediction](./Predict_holdout/ipynb)
+For addition questions, contact Jacob Heyman (jacobheyman702@gmail.com)
+
+## Repository Structure
+
+```
+├── README.md                           <- The top-level README for reviewers of this project
+├── images.                             <- images of visualizations for ReadME
+├── bakeoff_modeling_process.py         <- EOD and Modeling process for predictive model
+├── predict_holdout.py                  <- Final model prediction on the holdout dataset
+├── scaler.pickle.                      <- pickle file of model scaler
+├── model.pickle.                       <- pickle file of final model
+├── housing_preds_Jacob_Heyman.csv      <- Csv of predictions on holdout set
+├── kc_house_data_train.csv             <- train data set for modeling process
+└── kc_house_data_test_features.csv.    <- holdout data set 
